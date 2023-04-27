@@ -1,0 +1,103 @@
+
+//creating stack linklist
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int data;
+    struct node* next;
+}*top=NULL;
+
+void push(int);
+void print();
+int  isEmpty();
+int pop();
+
+int main()
+{
+    int data;
+    while(1){
+        printf("enter 1 to push\n");
+        printf("enter 2 to pop\n");
+      
+        printf("enter 3 to print\n");
+         printf("enter 4 to exit \n");
+        int chose;
+        scanf("%d",&chose);
+        
+        switch(chose){
+            case 1:
+                printf("enter nomber to push\n");
+                scanf("%d",&data);
+                push(data);
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+            print();
+                break;
+            default:
+            printf("entervalid number\n");
+        }
+
+
+    }
+
+return 0;
+    
+
+}
+void push(int data){
+    
+    struct node *newNode=malloc(sizeof(struct node));
+ 
+    if(newNode==NULL){
+        printf("stack overflow\n");
+        exit(1);
+        
+    }
+    newNode->data=data;
+    newNode->next=top;
+    top=newNode;
+    
+}
+void print(){
+    if(isEmpty()){
+        printf("stack underflow\n");
+    }
+    struct node *temp=top;
+    while(temp!=NULL){
+      printf("%d\n ",temp->data);
+      temp=temp->next;
+      
+    }
+}
+int isEmpty(){
+    if(top==NULL){
+        return 1;
+    }
+    else{
+        return 0;
+    
+    }
+}
+int pop(){
+    if (isEmpty()){
+        printf("stack overflow\n");
+        exit(1);
+    }
+    struct node*temp=top;
+    int var=temp->data;
+    top=top->next;
+    free(temp);
+    temp=NULL;
+    return var;
+    
+    
+}
+
+
+
+
+
